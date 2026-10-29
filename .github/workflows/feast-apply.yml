@@ -1,0 +1,45 @@
+name: feast-apply
+
+on:
+  pull_request:
+    branches: [main]
+    paths: ["feature_repo/**"]
+  push:
+    branches: [main]
+    paths: ["feature_repo/**"]
+  workflow_dispatch:
+
+jobs:
+  feast:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: setup-python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: install-packages
+        run: |
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: generate-feature-data
+        run: python feature_repo/main.py
+
+      - name: select-local-profile
+        run: cp feature_repo/feature_store.local.yaml feature_repo/feature_store.yaml
+
+      - name: feast-plan
+        if: github.event_name == 'pull_request'
+        run: cd feature_repo && feast plan
+
+      - name: feast-apply
+        if: github.event_name != 'pull_request'
+        run: cd feature_repo && feast apply
+
+      - name: feast-materialize-incremental
+        if: github.event_name != 'pull_request'
+        run: cd feature_repo && feast materialize-incremental "$(date -u +%Y-%m-%dT%H:%M:%S)"

@@ -1,0 +1,30 @@
+[project]
+name = "mlcicd"
+version = "0.1.0"
+description = "MLOps CI/CD pipeline (Iris -> churn) on GitHub Actions"
+requires-python = ">=3.11"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.ruff]
+line-length = 100
+target-version = "py311"
+
+[tool.ruff.lint]
+select = ["E", "F", "I"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
+markers = [
+    "data: data validation tests",
+    "unit: unit tests for feature/preprocessing functions",
+    "model: pre/post-train model behavior tests",
+    "regression: metric-vs-baseline regression tests",
+    "infra: pipeline/infra wiring tests (DVC stages, config loading)",
+    "serving: serving-layer integration and latency tests",
+    "feast: Feast online/offline parity tests",
+]
+filterwarnings = [
+    "ignore:.*DataFrame concatenation.*:FutureWarning"
+]

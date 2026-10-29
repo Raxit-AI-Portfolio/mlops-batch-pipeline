@@ -1,0 +1,58 @@
+name: train
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write
+
+jobs:
+  train:
+    runs-on: ubuntu-latest
+    env:
+      MLFLOW_TRACKING_USERNAME: ${{ vars.DAGSHUB_USER }}
+      MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_TOKEN }}
+    steps:
+        - name: checkout           
+          uses: actions/checkout@v4
+        
+        - name: setup-python       
+          uses: actions/setup-python@v5
+          with:
+            python-version: '3.11' 
+                
+        - name: install-packages
+          run: |
+            pip install -q -r requirements.txt
+            pip install -q -r requirements-dev.txt
+            pip install -q -e .
+        
+        - name: gcp-auth-wif
+          uses: google-github-actions/auth@v2
+          with:
+            workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+            service_account: ${{ vars.DEPLOYER_SA }}
+
+        - name: load-environment-variables
+          run: |
+            if [ -f profiles/github.env ]; then
+                # Parse lines, ignore comments, and write to GITHUB_ENV
+                # STORAGE_EMULATOR_HOST would redirect gcsfs to fake-gcs; CI uses the real bucket
+                grep -vE '^#|^$|^STORAGE_EMULATOR_HOST' profiles/github.env >> $GITHUB_ENV
+            else
+                echo "::error::profiles/github.env not found!"
+                exit 1
+            fi
+
+        - name: set-dvc-remote
+          run: dvc remote modify --local gcs url "gs://${{ vars.GCP_PROJECT }}-dvc"
+
+        - name: pull-data-from-dvc
+          run: dvc pull -r gcs
+        
+        - name: Reproduce DVC pipeline
+          run: dvc repro
+
+        - name: register-model
+          run: python -m mlcicd.registry.register

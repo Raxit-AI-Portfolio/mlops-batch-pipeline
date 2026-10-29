@@ -1,0 +1,59 @@
+schema: '2.0'
+stages:
+  validate:
+    cmd: python -m mlcicd.data.schema
+    deps:
+    - path: data/raw/iris.csv
+      hash: md5
+      md5: 500a0acbd112b7c512929eac892f9864
+      size: 4009
+    - path: src/mlcicd/data/schema.py
+      hash: md5
+      md5: 0b0c1c2ced67383f4e5cbefd56b0e684
+      size: 1191
+  train:
+    cmd: python -m mlcicd.training.train
+    deps:
+    - path: data/raw/iris.csv
+      hash: md5
+      md5: 500a0acbd112b7c512929eac892f9864
+      size: 4009
+    - path: src/mlcicd/data/load.py
+      hash: md5
+      md5: a4c3bf819f6406a4a29bab0f2b0985be
+      size: 738
+    - path: src/mlcicd/features/build.py
+      hash: md5
+      md5: 59cf7da9e8075a633ff9caa4ee9ee5ea
+      size: 312
+    - path: src/mlcicd/training/train.py
+      hash: md5
+      md5: f3cc4105868450c3ebda5e9997e89c69
+      size: 2168
+    params:
+      params.yaml:
+        train.random_state: 42
+        train.test_size: 0.3
+    outs:
+    - path: metrics.json
+      hash: md5
+      md5: 44449d767de601e9b90146f39313207b
+      size: 94
+  evaluate:
+    cmd: python -m mlcicd.training.evaluate
+    deps:
+    - path: baselines/metrics_baseline.json
+      hash: md5
+      md5: 44449d767de601e9b90146f39313207b
+      size: 94
+    - path: metrics.json
+      hash: md5
+      md5: 44449d767de601e9b90146f39313207b
+      size: 94
+    - path: src/mlcicd/training/evaluate.py
+      hash: md5
+      md5: 556d9b91eeb9aa4a5b363870d372d901
+      size: 1146
+    params:
+      params.yaml:
+        evaluate.tolerance: 0.02

@@ -1,0 +1,14 @@
+# GCP parity profile -- not yet applied against real infra (no BigQuery
+# dataset / Datastore provisioned in infra/gcp Terraform). Fill in the
+# REPLACE_ME values once that infra exists, then `PROFILE=gcp make feast-apply`.
+project: mlcicd_iris
+registry: gs://REPLACE_ME-feast-registry/registry.pb
+provider: gcp
+online_store:
+  type: datastore
+  project_id: REPLACE_ME-gcp-project
+offline_store:
+  type: bigquery
+  project_id: REPLACE_ME-gcp-project
+  dataset: REPLACE_ME-dataset
+entity_key_serialization_version: 2

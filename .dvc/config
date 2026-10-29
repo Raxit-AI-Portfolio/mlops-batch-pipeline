@@ -1,0 +1,6 @@
+[core]
+    remote = localstore
+['remote "localstore"']
+    url = gs://dvc-remote
+['remote "gcs"']
+    url = gs://REPLACE_ME-project-dvc

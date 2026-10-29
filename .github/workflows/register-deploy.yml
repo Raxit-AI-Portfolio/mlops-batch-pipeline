@@ -1,0 +1,90 @@
+name: register-deploy
+
+# Runs only after train.yml succeeds on main (the evaluate gate), or manually.
+# Must run on refs/heads/main: the WIF provider rejects any other ref.
+on:
+  workflow_run:
+    workflows: [train]
+    types: [completed]
+    branches: [main]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+  id-token: write   # lets the job request a GitHub OIDC token for WIF
+
+env:
+  IMAGE: ${{ vars.GCP_REGION }}-docker.pkg.dev/${{ vars.GCP_PROJECT }}/mlops/churn-app
+
+jobs:
+  deploy:
+    if: github.event_name == 'workflow_dispatch' || github.event.workflow_run.conclusion == 'success'
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.workflow_run.head_sha || github.sha }}
+
+      - name: gcp-auth-wif
+        uses: google-github-actions/auth@v2
+        with:
+          workload_identity_provider: ${{ vars.WIF_PROVIDER }}
+          service_account: ${{ vars.DEPLOYER_SA }}
+
+      - name: setup-gcloud
+        uses: google-github-actions/setup-gcloud@v2
+
+      - name: docker-login-artifact-registry
+        run: gcloud auth configure-docker ${{ vars.GCP_REGION }}-docker.pkg.dev --quiet
+
+      - name: build-and-push
+        run: |
+          docker build -t "$IMAGE:${{ github.sha }}" .
+          docker push "$IMAGE:${{ github.sha }}"
+
+      - name: deploy-cloud-run
+        id: deploy
+        uses: google-github-actions/deploy-cloudrun@v2
+        with:
+          service: churn-app
+          region: ${{ vars.GCP_REGION }}
+          image: ${{ env.IMAGE }}:${{ github.sha }}
+          env_vars: PROFILE=prod
+          flags: --port=8000
+
+      - name: show-url
+        run: echo "${{ steps.deploy.outputs.url }}"
+
+      - name: setup-python
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+
+      - name: install-packages
+        run: |
+          pip install -q -r requirements.txt
+          pip install -q -e .
+
+      - name: post-deploy-check
+        env:
+          PROFILE: prod
+          APP_URL: ${{ steps.deploy.outputs.url }}
+          MLFLOW_TRACKING_USERNAME: ${{ vars.DAGSHUB_USER }}
+          MLFLOW_TRACKING_PASSWORD: ${{ secrets.DAGSHUB_TOKEN }}
+        run: python -m mlcicd.monitoring.post_deploy_check
+
+      # Only runs once AIRFLOW_API_URL points at a reachable Airflow webserver
+      # (self-hosted runner / onprem, Phase 5b). No-op until that var is set.
+      - name: trigger-retrain-dag
+        if: ${{ vars.AIRFLOW_API_URL != '' }}
+        env:
+          AIRFLOW_API_URL: ${{ vars.AIRFLOW_API_URL }}
+          AIRFLOW_ADMIN_USER: ${{ vars.AIRFLOW_ADMIN_USER }}
+          AIRFLOW_ADMIN_PASSWORD: ${{ secrets.AIRFLOW_ADMIN_PASSWORD }}
+        run: |
+          curl -sf -X POST \
+            -u "$AIRFLOW_ADMIN_USER:$AIRFLOW_ADMIN_PASSWORD" \
+            -H "Content-Type: application/json" \
+            -d '{}' \
+            "$AIRFLOW_API_URL/api/v1/dags/retrain_dag/dagRuns"

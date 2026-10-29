@@ -1,0 +1,29 @@
+# --- DVC internal ---
+.dvc/cache
+.dvc/tmp
+
+# --- Python ---
+__pycache__
+*.py[cod]
+.venv
+venv
+.pytest_cache
+.ruff_cache
+.mypy_cache
+*.egg-info
+
+# --- Git / CI ---
+.git
+.github
+
+# --- Docs / non-data ---
+README.md
+docs/
+
+# --- Test / notebooks scratch ---
+.ipynb_checkpoints
+notebooks/scratch/
+
+# --- OS ---
+.DS_Store
+Thumbs.db

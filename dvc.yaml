@@ -1,0 +1,28 @@
+stages:
+  validate:
+    cmd: python -m mlcicd.data.schema
+    deps:
+    - data/raw/iris.csv
+    - src/mlcicd/data/schema.py
+
+  train:
+    cmd: python -m mlcicd.training.train
+    deps:
+    - data/raw/iris.csv
+    - src/mlcicd/data/load.py
+    - src/mlcicd/features/build.py
+    - src/mlcicd/training/train.py
+    params:
+    - train.random_state
+    - train.test_size
+    metrics:
+    - metrics.json:
+        cache: false
+  evaluate:
+    cmd: python -m mlcicd.training.evaluate
+    deps:
+    - baselines/metrics_baseline.json
+    - src/mlcicd/training/evaluate.py
+    - metrics.json
+    params:
+    - evaluate.tolerance

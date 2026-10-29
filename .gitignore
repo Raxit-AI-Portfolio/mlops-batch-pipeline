@@ -1,0 +1,99 @@
+# --- Python ---
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+dist/
+*.egg-info/
+.eggs/
+
+# --- Virtualenv ---
+.venv/
+venv/
+env/
+
+# --- Env / secrets ---
+.env
+.env.*
+!.env.example
+.secrets.local
+!.secrets.local.example
+*.json
+!package.json
+!feature_repo/**/*.json
+service-account*.json
+gcp-key*.json
+
+# --- DVC ---
+# Do NOT add blanket patterns like `/data/raw/*` here. scmrepo then reports the
+# directory itself as ignored, and DVC prunes ignored directories from its stage
+# walk (collect_files in dvc/repo/index.py), so *.dvc files inside are never
+# collected -- push/pull/checkout then silently no-op on that data.
+# `dvc add` maintains per-directory .gitignore entries instead.
+.dvc/cache/
+.dvc/tmp/
+.dvc/config.local
+
+# --- MLflow ---
+mlruns/
+mlartifacts/
+
+# --- Model artifacts ---
+*.pkl
+*.joblib
+*.h5
+*.onnx
+model.pkl
+
+# --- Metrics (generated, not baseline) ---
+metrics.json
+!baselines/metrics_baseline.json
+
+# --- Test / coverage ---
+.pytest_cache/
+.coverage
+htmlcov/
+coverage.xml
+
+# --- Ruff / mypy / tox ---
+.ruff_cache/
+.mypy_cache/
+.tox/
+
+# --- Jupyter ---
+.ipynb_checkpoints/
+
+# --- Docker / act ---
+.actrc.local
+
+# --- Evidently / monitoring output ---
+monitoring/reports/*.html
+
+# --- OS / editor ---
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+*.swp
+
+# --- Feast (phase 9) ---
+feature_repo/data/
+feature_repo/.feast/
+feature_repo/feature_store.yaml
+registry.db
+
+# Terraform
+.terraform/
+*.tfstate
+*.tfstate.*
+*.tfvars
+crash.log
+tfplan*
+.venv-ui/
+monitoring/prometheus.prod.yml
+reports/
+tfdestroy*
+
+.venv_test/

@@ -1,0 +1,177 @@
+<mxfile host="65bd71144e">
+    <diagram id="gcp-arch" name="GCP deployment view">
+        <mxGraphModel dx="1522" dy="643" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="1250" pageHeight="680" math="0" shadow="0">
+            <root>
+                <mxCell id="0"/>
+                <mxCell id="1" parent="0"/>
+                <mxCell id="c2" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#9AA0A6;dashed=1;verticalAlign=top;fontStyle=1;fontSize=13;arcSize=3;" value="MLOps pipeline - GitHub Actions" vertex="1">
+                    <mxGeometry height="330" width="520" x="20" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="c3" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F0FE;strokeColor=#4285F4;fontSize=11;" value="GitHub Actions&lt;br&gt;hosted runners + WIF" vertex="1">
+                    <mxGeometry height="50" width="130" x="40" y="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="c4" parent="1" style="sketch=0;html=1;fillColor=#4285F4;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.gcp2.hexIcon;prIcon=cloud_run;fontSize=11;" value="Pipeline API&lt;br&gt;Cloud Run" vertex="1">
+                    <mxGeometry height="58" width="64" x="230" y="50" as="geometry"/>
+                </mxCell>
+                <mxCell id="c5" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5F6368;fontSize=11;" value="DVC&lt;br&gt;pipeline + gate" vertex="1">
+                    <mxGeometry height="46" width="110" x="400" y="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="c6" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5F6368;fontSize=11;" value="MLflow&lt;br&gt;tracking + registry" vertex="1">
+                    <mxGeometry height="46" width="120" x="230" y="170" as="geometry"/>
+                </mxCell>
+                <mxCell id="c7" parent="1" style="sketch=0;html=1;fillColor=#4285F4;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.gcp2.hexIcon;prIcon=cloud_sql;fontSize=11;" value="Cloud SQL&lt;br&gt;MLflow backend" vertex="1">
+                    <mxGeometry height="58" width="64" x="410" y="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="c8" parent="1" style="sketch=0;html=1;fillColor=#EA4335;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.gcp2.hexIcon;prIcon=secret_manager;fontSize=11;" value="Secret Manager" vertex="1">
+                    <mxGeometry height="58" width="64" x="60" y="250" as="geometry"/>
+                </mxCell>
+                <mxCell id="c9" parent="1" style="sketch=0;html=1;fillColor=#34A853;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.gcp2.hexIcon;prIcon=cloud_monitoring;fontSize=11;" value="Cloud Monitoring&lt;br&gt;Managed Prometheus" vertex="1">
+                    <mxGeometry height="58" width="64" x="250" y="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="c10" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#9AA0A6;dashed=1;verticalAlign=top;fontStyle=1;fontSize=13;arcSize=3;" value="Orchestrator" vertex="1">
+                    <mxGeometry height="330" width="180" x="560" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="c11" parent="1" style="sketch=0;html=1;fillColor=#4285F4;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.gcp2.hexIcon;prIcon=cloud_composer;fontSize=11;" value="Cloud Composer&lt;br&gt;Airflow DAGs" vertex="1">
+                    <mxGeometry height="58" width="64" x="620" y="90" as="geometry"/>
+                </mxCell>
+                <mxCell id="c12" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5F6368;fontSize=11;" value="Airflow REST API" vertex="1">
+                    <mxGeometry height="40" width="100" x="600" y="230" as="geometry"/>
+                </mxCell>
+                <mxCell id="c13" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#9AA0A6;dashed=1;verticalAlign=top;fontStyle=1;fontSize=13;arcSize=3;" value="Artifact store" vertex="1">
+                    <mxGeometry height="330" width="230" x="760" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="c14" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5F6368;fontSize=11;" value="Git repo&lt;br&gt;GitHub: pointers,&lt;br&gt;version records" vertex="1">
+                    <mxGeometry height="56" width="150" x="790" y="60" as="geometry"/>
+                </mxCell>
+                <mxCell id="c15" parent="1" style="sketch=0;html=1;fillColor=#4285F4;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.gcp2.hexIcon;prIcon=cloud_storage;fontSize=11;" value="Cloud Storage&lt;br&gt;DVC remote" vertex="1">
+                    <mxGeometry height="58" width="64" x="830" y="200" as="geometry"/>
+                </mxCell>
+                <mxCell id="c16" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#9AA0A6;dashed=1;verticalAlign=top;fontStyle=1;fontSize=13;arcSize=3;" value="Data platform" vertex="1">
+                    <mxGeometry height="240" width="300" x="20" y="380" as="geometry"/>
+                </mxCell>
+                <mxCell id="c17" parent="1" style="sketch=0;html=1;fillColor=#4285F4;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.gcp2.hexIcon;prIcon=cloud_run;fontSize=11;" value="ETL service&lt;br&gt;Cloud Run job" vertex="1">
+                    <mxGeometry height="58" width="64" x="60" y="430" as="geometry"/>
+                </mxCell>
+                <mxCell id="c18" parent="1" style="sketch=0;html=1;fillColor=#669DF6;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.gcp2.hexIcon;prIcon=bigquery;fontSize=11;" value="BigQuery&lt;br&gt;curated data" vertex="1">
+                    <mxGeometry height="58" width="64" x="200" y="430" as="geometry"/>
+                </mxCell>
+                <mxCell id="c19" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5F6368;fontSize=11;" value="DVC client&lt;br&gt;via pipeline data API" vertex="1">
+                    <mxGeometry height="40" width="200" x="50" y="550" as="geometry"/>
+                </mxCell>
+                <mxCell id="c20" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#9AA0A6;dashed=1;verticalAlign=top;fontStyle=1;fontSize=13;arcSize=3;" value="Model service" vertex="1">
+                    <mxGeometry height="240" width="430" x="340" y="380" as="geometry"/>
+                </mxCell>
+                <mxCell id="c21" parent="1" style="sketch=0;html=1;fillColor=#4285F4;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.gcp2.hexIcon;prIcon=cloud_run;fontSize=11;" value="Training&lt;br&gt;Cloud Run job" vertex="1">
+                    <mxGeometry height="58" width="64" x="370" y="430" as="geometry"/>
+                </mxCell>
+                <mxCell id="c22" parent="1" style="sketch=0;html=1;fillColor=#34A853;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.gcp2.hexIcon;prIcon=vertexai;fontSize=11;" value="Vertex AI&lt;br&gt;DL custom job" vertex="1">
+                    <mxGeometry height="58" width="64" x="470" y="430" as="geometry"/>
+                </mxCell>
+                <mxCell id="c23" parent="1" style="sketch=0;html=1;fillColor=#4285F4;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.gcp2.hexIcon;prIcon=cloud_run;fontSize=11;" value="Serving&lt;br&gt;Cloud Run" vertex="1">
+                    <mxGeometry height="58" width="64" x="570" y="430" as="geometry"/>
+                </mxCell>
+                <mxCell id="c24" parent="1" style="sketch=0;html=1;fillColor=#4285F4;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.gcp2.hexIcon;prIcon=artifact_registry;fontSize=11;" value="Artifact Registry&lt;br&gt;images" vertex="1">
+                    <mxGeometry height="58" width="64" x="670" y="430" as="geometry"/>
+                </mxCell>
+                <mxCell id="c25" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5F6368;fontSize=11;" value="scikit-learn / PyTorch&lt;br&gt;build_features, fit, predict" vertex="1">
+                    <mxGeometry height="40" width="230" x="400" y="550" as="geometry"/>
+                </mxCell>
+                <mxCell id="c26" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#9AA0A6;dashed=1;verticalAlign=top;fontStyle=1;fontSize=13;arcSize=3;" value="Analytics service" vertex="1">
+                    <mxGeometry height="240" width="260" x="790" y="380" as="geometry"/>
+                </mxCell>
+                <mxCell id="c27" parent="1" style="sketch=0;html=1;fillColor=#4285F4;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.gcp2.hexIcon;prIcon=cloud_run;fontSize=11;" value="Reporting API&lt;br&gt;Cloud Run" vertex="1">
+                    <mxGeometry height="58" width="64" x="830" y="430" as="geometry"/>
+                </mxCell>
+                <mxCell id="c28" parent="1" style="sketch=0;html=1;fillColor=#669DF6;strokeColor=none;verticalLabelPosition=bottom;verticalAlign=top;align=center;outlineConnect=0;shape=mxgraph.gcp2.hexIcon;prIcon=bigquery;fontSize=11;" value="BigQuery&lt;br&gt;marts" vertex="1">
+                    <mxGeometry height="58" width="64" x="940" y="430" as="geometry"/>
+                </mxCell>
+                <mxCell id="c29" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFFFFF;strokeColor=#5F6368;fontSize=11;" value="DVC client&lt;br&gt;via pipeline data API" vertex="1">
+                    <mxGeometry height="40" width="170" x="830" y="550" as="geometry"/>
+                </mxCell>
+                <mxCell id="c30" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F8F9FA;strokeColor=#9AA0A6;dashed=1;verticalAlign=top;fontStyle=1;fontSize=13;arcSize=3;" value="Consumers" vertex="1">
+                    <mxGeometry height="330" width="200" x="1010" y="20" as="geometry"/>
+                </mxCell>
+                <mxCell id="c31" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FCE8E6;strokeColor=#EA4335;fontSize=11;" value="Grafana" vertex="1">
+                    <mxGeometry height="40" width="130" x="1040" y="70" as="geometry"/>
+                </mxCell>
+                <mxCell id="c32" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FEF7E0;strokeColor=#F9AB00;fontSize=11;" value="PowerBI&lt;br&gt;BigQuery connector" vertex="1">
+                    <mxGeometry height="46" width="130" x="1040" y="160" as="geometry"/>
+                </mxCell>
+                <mxCell id="c33" parent="1" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E6F4EA;strokeColor=#34A853;fontSize=11;" value="UI&lt;br&gt;Cloud Run / Firebase" vertex="1">
+                    <mxGeometry height="46" width="130" x="1040" y="260" as="geometry"/>
+                </mxCell>
+                <mxCell id="c34" edge="1" parent="1" source="c3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;" target="c4" value="CLI / API">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c35" edge="1" parent="1" source="c11" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;" target="c4" value="CLI / API">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c36" edge="1" parent="1" source="c4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;" target="c5" value="">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c37" edge="1" parent="1" source="c4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;" target="c6" value="">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c38" edge="1" parent="1" source="c6" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;" target="c7" value="">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c39" edge="1" parent="1" source="c4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;" target="c14" value="version record">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c40" edge="1" parent="1" source="c5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;" target="c15" value="push / pull">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c41" edge="1" parent="1" source="c4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;" target="c17" value="run ingest">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c42" edge="1" parent="1" source="c17" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;" target="c18" value="">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c43" edge="1" parent="1" source="c4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;" target="c21" value="POST /jobs/train">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c44" edge="1" parent="1" source="c21" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;entryX=0.175;entryY=0.5;entryDx=0;entryDy=0;entryPerimeter=0;" target="c23" value="push image">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c45" edge="1" parent="1" source="c4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;dashed=1;fontSize=10;" target="c23" value="deploy by digest">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c46" edge="1" parent="1" source="c24" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;dashed=1;fontSize=10;" target="c23" value="image">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c47" edge="1" parent="1" source="c19" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;dashed=1;fontSize=10;" target="c4" value="get / put data">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c48" edge="1" parent="1" source="c29" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;dashed=1;fontSize=10;" target="c4" value="get data">
+                    <mxGeometry relative="1" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="915" y="640"/>
+                            <mxPoint x="262" y="640"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="c49" edge="1" parent="1" source="c27" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;" target="c28" value="">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c50" edge="1" parent="1" source="c8" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;dashed=1;fontSize=10;" target="c4" value="secrets">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c51" edge="1" parent="1" source="c9" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;exitX=0.825;exitY=0.5;exitDx=0;exitDy=0;exitPerimeter=0;" target="c31" value="">
+                    <mxGeometry relative="1" x="-0.0957" as="geometry">
+                        <Array as="points">
+                            <mxPoint x="302.8" y="320"/>
+                            <mxPoint x="1200" y="320"/>
+                            <mxPoint x="1200" y="90"/>
+                        </Array>
+                    </mxGeometry>
+                </mxCell>
+                <mxCell id="c52" edge="1" parent="1" source="c32" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;" target="c27" value="">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+                <mxCell id="c53" edge="1" parent="1" source="c33" style="edgeStyle=orthogonalEdgeStyle;rounded=1;html=1;endArrow=block;fontSize=10;" target="c23" value="/predict">
+                    <mxGeometry relative="1" as="geometry"/>
+                </mxCell>
+            </root>
+        </mxGraphModel>
+    </diagram>
+</mxfile>

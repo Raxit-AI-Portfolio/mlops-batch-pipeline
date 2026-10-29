@@ -1,0 +1,47 @@
+name: Drift
+
+# Data-drift check (Evidently), manual only for now. Needs no GCP: the reference data is
+# regenerated from sklearn by mlcicd.data.load, so it works while the cloud stack is destroyed.
+# To run weekly, uncomment the schedule block (scheduled runs only fire from the default branch).
+on:
+  # schedule:
+  #   - cron: "0 6 * * 1"   # Mondays 06:00 UTC
+  workflow_dispatch:
+    inputs:
+      shift:
+        description: "Add this to sepal_length to simulate drift (0 = no drift)"
+        default: "0"
+
+permissions:
+  contents: read
+
+jobs:
+  drift:
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout
+        uses: actions/checkout@v4
+
+      - name: setup-python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: install-packages
+        run: |
+          pip install -r requirements.txt
+          pip install -e .
+
+      - name: generate-reference-data
+        run: python -m mlcicd.data.load
+
+      - name: run-drift-check
+        run: python -m mlcicd.monitoring.drift --shift "${{ inputs.shift || '0' }}"
+
+      - name: upload-report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: drift-report
+          path: reports/
+          if-no-files-found: warn
